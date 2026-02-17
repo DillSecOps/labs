@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: env-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: env-demo
+  template:
+    metadata:
+      labels:
+        app: env-demo
+    spec:
+      containers:
+        - name: env-demo
+          image: busybox
+          command: ["/bin/sh", "-c"]
+          args:
+            - while true; do
+                echo "----";
+                env | sort;
+                sleep 10;
+              done
+          envFrom:
+            - configMapRef:
+                name: hello-env
