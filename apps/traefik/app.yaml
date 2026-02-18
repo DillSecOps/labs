@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://traefik.github.io/charts
+    chart: traefik
+    targetRevision: traefik-39.0.1
+    helm:
+      valueFiles:
+        - $values/apps/traefik/values.yaml
+
+  sources:
+    # This "values source" lets Argo read values.yaml from your Git repo
+    - repoURL: https://github.com/DillSecOps/labs.git
+      targetRevision: main
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: traefik
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
