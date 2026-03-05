@@ -18,6 +18,4 @@ providers:
     enabled: true
   kubernetesIngress:
     enabled: true
-service:
-  spec:
-    clusterIP: "10.96.193.25"
+
