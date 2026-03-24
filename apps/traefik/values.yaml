@@ -18,4 +18,10 @@ providers:
     enabled: true
   kubernetesIngress:
     enabled: true
+<<<<<<< HEAD
 
+=======
+service:
+  spec:
+    clusterIP: "10.96.193.25"
+>>>>>>> e8a11c7 (adding cluster IP)
